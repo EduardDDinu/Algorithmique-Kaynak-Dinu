@@ -1,0 +1,35 @@
+package s01;
+public class Parenth {
+  public static boolean isBalanced(String l) {
+    char c;
+    CharStack s = new CharStack();
+    for (int i=0; i<l.length(); i++) {
+      c = l.charAt(i);
+      if(isOpeningSign(c)){
+          s.push(c);
+      }
+      else if(isClosingSign(c)) {
+          if(s.isEmpty()){
+              return false;
+          }
+          char top = s.pop();
+          if (!isMatchingPair(top,c )) {
+              return false;
+          }
+      }
+    }
+
+    return s.isEmpty();
+  }
+  //-------------------------------------
+  private static boolean isOpeningSign(char c) {
+    return (c == '(') || (c == '{');
+  }
+  private static boolean isClosingSign(char c) {
+    return (c == ')') || (c == '}');
+  }
+  private static boolean isMatchingPair(char c1, char c2) {
+    return (  (c1=='(') && (c2==')'))
+      ||   (  (c1=='{') && (c2=='}'));
+  }
+}
